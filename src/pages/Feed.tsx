@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useForm } from 'react-hook-form';
+import type { SubmitHandler } from 'react-hook-form';
 import { useAuth } from '../hooks/useAuth';
 import Navbar from '../components/Navbar';
 
@@ -10,6 +12,10 @@ interface Post {
   content: string;
   timestamp: string;
   likes: number;
+}
+
+interface PostFormInput {
+  content: string;
 }
 
 // Sample initial posts
@@ -32,8 +38,18 @@ const initialPosts: Post[] = [
 
 const Feed = () => {
   const [posts, setPosts] = useState<Post[]>(initialPosts);
-  const [newPostContent, setNewPostContent] = useState('');
   const { isAuthenticated, setShowAuthModal } = useAuth();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    setFocus,
+  } = useForm<PostFormInput>({
+    defaultValues: {
+      content: '',
+    },
+  });
 
   const handleInteraction = () => {
     if (!isAuthenticated) {
@@ -43,23 +59,24 @@ const Feed = () => {
     return true;
   };
 
-  const handlePostSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const onSubmit: SubmitHandler<PostFormInput> = (data) => {
     if (!handleInteraction()) return;
 
-    if (newPostContent.trim() === '') return;
+    const { content } = data;
+
+    if (content.trim() === '') return;
 
     const newPost: Post = {
       id: Date.now().toString(),
       author: 'You',
-      content: newPostContent,
+      content: content,
       timestamp: 'Just now',
       likes: 0,
     };
 
     setPosts([newPost, ...posts]);
-    setNewPostContent('');
+    reset();
+    setFocus('content');
   };
 
   const handleFeatureClick = () => {
@@ -76,15 +93,21 @@ const Feed = () => {
 
         {/* Post editor */}
         <div className="bg-white rounded-lg shadow-md p-4 mb-8">
-          <form onSubmit={handlePostSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <textarea
-              className="w-full border border-gray-300 rounded-md p-3 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`w-full border ${
+                errors.content ? 'border-red-500' : 'border-gray-300'
+              } rounded-md p-3 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500`}
               placeholder="What's on your mind?"
               rows={3}
-              value={newPostContent}
-              onChange={(e) => setNewPostContent(e.target.value)}
               onClick={() => handleInteraction()}
+              {...register('content')}
             ></textarea>
+            {errors.content && (
+              <p className="mt-1 text-xs text-red-500 mb-2">
+                {errors.content.message}
+              </p>
+            )}
 
             <div className="flex justify-between items-center">
               <div className="flex space-x-2">

@@ -1,23 +1,31 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useForm } from 'react-hook-form';
+import type { SubmitHandler } from 'react-hook-form';
 import { useAuth } from '../hooks/useAuth';
 import Navbar from '../components/Navbar';
+
+interface FormInputs {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
 
 const SignUp = () => {
   const { setIsAuthenticated, setCurrentUser } = useAuth();
   const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm<FormInputs>();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
-    const confirmPassword = formData.get('confirmPassword') as string;
+  const password = watch('password');
 
-    if (password !== confirmPassword) {
-      alert("Passwords don't match. Please try again.");
-      return;
-    }
+  const onSubmit: SubmitHandler<FormInputs> = (data) => {
+    const { email } = data;
 
     // In a real app, we would send this data to the backend
     // For this demo, we'll just simulate a successful registration
@@ -46,7 +54,7 @@ const SignUp = () => {
             <p className="text-gray-600 mt-2">Join Atlys today</p>
           </div>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
               <label
                 htmlFor="name"
@@ -55,13 +63,25 @@ const SignUp = () => {
                 Full Name
               </label>
               <input
-                type="text"
                 id="name"
-                name="name"
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                type="text"
+                className={`w-full px-3 py-2 border ${
+                  errors.name ? 'border-red-500' : 'border-gray-300'
+                } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                 placeholder="John Doe"
+                {...register('name', {
+                  required: 'Full name is required',
+                  minLength: {
+                    value: 2,
+                    message: 'Name must be at least 2 characters',
+                  },
+                })}
               />
+              {errors.name && (
+                <p className="mt-1 text-xs text-red-500">
+                  {errors.name.message}
+                </p>
+              )}
             </div>
 
             <div className="mb-4">
@@ -72,13 +92,25 @@ const SignUp = () => {
                 Email
               </label>
               <input
-                type="email"
                 id="email"
-                name="email"
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                type="email"
+                className={`w-full px-3 py-2 border ${
+                  errors.email ? 'border-red-500' : 'border-gray-300'
+                } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                 placeholder="your@email.com"
+                {...register('email', {
+                  required: 'Email is required',
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: 'Invalid email address',
+                  },
+                })}
               />
+              {errors.email && (
+                <p className="mt-1 text-xs text-red-500">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
 
             <div className="mb-4">
@@ -89,14 +121,25 @@ const SignUp = () => {
                 Password
               </label>
               <input
-                type="password"
                 id="password"
-                name="password"
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                type="password"
+                className={`w-full px-3 py-2 border ${
+                  errors.password ? 'border-red-500' : 'border-gray-300'
+                } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                 placeholder="••••••••"
-                minLength={8}
+                {...register('password', {
+                  required: 'Password is required',
+                  minLength: {
+                    value: 8,
+                    message: 'Password must be at least 8 characters',
+                  },
+                })}
               />
+              {errors.password && (
+                <p className="mt-1 text-xs text-red-500">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
 
             <div className="mb-6">
@@ -107,14 +150,23 @@ const SignUp = () => {
                 Confirm Password
               </label>
               <input
-                type="password"
                 id="confirmPassword"
-                name="confirmPassword"
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                type="password"
+                className={`w-full px-3 py-2 border ${
+                  errors.confirmPassword ? 'border-red-500' : 'border-gray-300'
+                } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                 placeholder="••••••••"
-                minLength={8}
+                {...register('confirmPassword', {
+                  required: 'Please confirm your password',
+                  validate: (value) =>
+                    value === password || 'Passwords do not match',
+                })}
               />
+              {errors.confirmPassword && (
+                <p className="mt-1 text-xs text-red-500">
+                  {errors.confirmPassword.message}
+                </p>
+              )}
             </div>
 
             <button

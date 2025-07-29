@@ -1,11 +1,23 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useForm } from 'react-hook-form';
+import type { SubmitHandler } from 'react-hook-form';
 import { useAuth } from '../hooks/useAuth';
 import Navbar from '../components/Navbar';
+
+interface FormInputs {
+  email: string;
+  password: string;
+}
 
 const SignIn = () => {
   const { setIsAuthenticated, setCurrentUser } = useAuth();
   const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormInputs>();
 
   // Test accounts
   const testAccounts = [
@@ -13,11 +25,8 @@ const SignIn = () => {
     { email: 'test@user.com', password: 'testpass' },
   ];
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
+  const onSubmit: SubmitHandler<FormInputs> = (data) => {
+    const { email, password } = data;
 
     // Simple authentication check
     const isValid = testAccounts.some(
@@ -53,7 +62,7 @@ const SignIn = () => {
             <p className="text-gray-600 mt-2">Sign in to continue to Atlys</p>
           </div>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
               <label
                 htmlFor="email"
@@ -62,13 +71,25 @@ const SignIn = () => {
                 Email
               </label>
               <input
-                type="email"
                 id="email"
-                name="email"
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                type="email"
+                className={`w-full px-3 py-2 border ${
+                  errors.email ? 'border-red-500' : 'border-gray-300'
+                } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                 placeholder="your@email.com"
+                {...register('email', {
+                  required: 'Email is required',
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: 'Invalid email address',
+                  },
+                })}
               />
+              {errors.email && (
+                <p className="mt-1 text-xs text-red-500">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
 
             <div className="mb-6">
@@ -84,13 +105,25 @@ const SignIn = () => {
                 </a>
               </div>
               <input
-                type="password"
                 id="password"
-                name="password"
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                type="password"
+                className={`w-full px-3 py-2 border ${
+                  errors.password ? 'border-red-500' : 'border-gray-300'
+                } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                 placeholder="••••••••"
+                {...register('password', {
+                  required: 'Password is required',
+                  minLength: {
+                    value: 6,
+                    message: 'Password must be at least 6 characters',
+                  },
+                })}
               />
+              {errors.password && (
+                <p className="mt-1 text-xs text-red-500">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
 
             <button
