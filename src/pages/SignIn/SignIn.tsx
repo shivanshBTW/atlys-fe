@@ -2,15 +2,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import type { SubmitHandler } from 'react-hook-form';
-import { useAuth } from '../hooks/useAuth';
-import Navbar from '../components/Navbar';
+import { useAuth } from '../../hooks/useAuth';
+import Navbar from '../../components/Navbar';
 
 interface FormInputs {
   email: string;
   password: string;
 }
 
-const SignIn = () => {
+export const SignIn = () => {
   const { setIsAuthenticated, setCurrentUser } = useAuth();
   const navigate = useNavigate();
   const {
@@ -154,5 +154,3 @@ const SignIn = () => {
     </>
   );
 };
-
-export default SignIn;
