@@ -2,8 +2,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import type { SubmitHandler } from 'react-hook-form';
-import { useAuth } from '../hooks/useAuth';
-import Navbar from '../components/Navbar';
+import { useAuth } from '../../hooks/useAuth';
+import Navbar from '../../components/Navbar';
 
 interface FormInputs {
   name: string;
@@ -12,7 +12,7 @@ interface FormInputs {
   confirmPassword: string;
 }
 
-const SignUp = () => {
+export const SignUp = () => {
   const { setIsAuthenticated, setCurrentUser } = useAuth();
   const navigate = useNavigate();
   const {
@@ -27,8 +27,7 @@ const SignUp = () => {
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
     const { email } = data;
 
-    // In a real app, we would send this data to the backend
-    // For this demo, we'll just simulate a successful registration
+    // Simulating an API call here
     setIsAuthenticated(true);
     setCurrentUser({ email });
     navigate('/');
@@ -197,5 +196,3 @@ const SignUp = () => {
     </>
   );
 };
-
-export default SignUp;
