@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import type { SubmitHandler } from 'react-hook-form';
-import { useAuth } from '../hooks/useAuth';
-import Navbar from '../components/Navbar';
+import { useAuth } from '../../hooks/useAuth';
+import Navbar from '../../components/Navbar';
 
 // Sample post type
 interface Post {
@@ -36,7 +36,7 @@ const initialPosts: Post[] = [
   },
 ];
 
-const Feed = () => {
+export const Feed = () => {
   const [posts, setPosts] = useState<Post[]>(initialPosts);
   const { isAuthenticated, setShowAuthModal } = useAuth();
   const {
@@ -197,5 +197,3 @@ const Feed = () => {
     </>
   );
 };
-
-export default Feed;

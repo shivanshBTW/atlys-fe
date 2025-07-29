@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 import { AuthContext } from './context/AuthContext';
 import AuthModal from './components/AuthModal';
-import Feed from './pages/Feed';
+import { Feed } from './pages/Feed';
 import { SignIn } from './pages/SignIn';
 import { SignUp } from './pages/SignUp';
 
