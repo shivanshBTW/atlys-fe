@@ -1,69 +1,87 @@
-# React + TypeScript + Vite
+# Atlys Frontend Assignment
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a frontend application built for the Atlys Frontend Hiring Task. It's a mini frontend app with an authentication flow as per the provided design.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Feed Page**: Serves as the landing page
 
-## Expanding the ESLint configuration
+  - For unauthenticated users, any interaction triggers a sign in/sign up modal
+  - After authentication, users can fully interact with the feed
+  - Post Editor with publish functionality
+  - Interactive feed with posts
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Authentication**:
+  - Sign In page
+  - Sign Up page
+  - Modal-based authentication for unauthenticated users
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- **Framework**: React with TypeScript
+- **Styling**: TailwindCSS
+- **Routing**: React Router
+- **Animations**: Framer Motion
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Test Accounts
+
+The following test accounts are available for testing:
+
+```
+demo@example.com / password123
+test@user.com / testpass
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Prerequisites
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Node.js (v14 or higher)
+- Yarn package manager
+
+### Installation
+
+1. Clone the repository:
+
 ```
+git clone https://github.com/yourusername/atlys-fe.git
+cd atlys-fe
+```
+
+2. Install dependencies:
+
+```
+yarn install
+```
+
+3. Start the development server:
+
+```
+yarn dev
+```
+
+4. Open your browser and navigate to `http://localhost:5173`
+
+## Implementation Details
+
+- **State Management**: React Context API for authentication state
+- **Responsive Design**: Fully responsive UI
+- **Form Handling**: Form submissions with validation
+- **Animations**: Smooth transitions and animations using Framer Motion
+
+## Deployment
+
+The application is deployed at: [Live Preview URL]
+
+## What was fun/challenging
+
+- Implementing the authentication flow with modals
+- Creating smooth animations for better user experience
+- Building a responsive design that works well on all devices
+
+## Future Improvements
+
+- Add more interactive features to posts
+- Implement persistent storage for posts
+- Add more animations and transitions
+- Implement dark mode
