@@ -34,19 +34,11 @@ export const SignUp = () => {
             </div>
 
             <div className="mb-4">
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Email
-              </label>
-              <input
-                id="email"
+              <TextField
+                label="Email"
                 type="email"
-                className={`w-full px-3 py-2 border ${
-                  errors.email ? 'border-red-500' : 'border-gray-300'
-                } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                 placeholder="your@email.com"
+                error={errors.email?.message}
                 {...register('email', {
                   required: 'Email is required',
                   pattern: {
@@ -55,27 +47,14 @@ export const SignUp = () => {
                   },
                 })}
               />
-              {errors.email && (
-                <p className="mt-1 text-xs text-red-500">
-                  {errors.email.message}
-                </p>
-              )}
             </div>
 
             <div className="mb-4">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Password
-              </label>
-              <input
-                id="password"
+              <TextField
+                label="Password"
                 type="password"
-                className={`w-full px-3 py-2 border ${
-                  errors.password ? 'border-red-500' : 'border-gray-300'
-                } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                 placeholder="••••••••"
+                error={errors.password?.message}
                 {...register('password', {
                   required: 'Password is required',
                   minLength: {
@@ -84,38 +63,20 @@ export const SignUp = () => {
                   },
                 })}
               />
-              {errors.password && (
-                <p className="mt-1 text-xs text-red-500">
-                  {errors.password.message}
-                </p>
-              )}
             </div>
 
             <div className="mb-6">
-              <label
-                htmlFor="confirmPassword"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Confirm Password
-              </label>
-              <input
-                id="confirmPassword"
+              <TextField
+                label="Confirm Password"
                 type="password"
-                className={`w-full px-3 py-2 border ${
-                  errors.confirmPassword ? 'border-red-500' : 'border-gray-300'
-                } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                 placeholder="••••••••"
+                error={errors.confirmPassword?.message}
                 {...register('confirmPassword', {
                   required: 'Please confirm your password',
                   validate: (value) =>
                     value === password || 'Passwords do not match',
                 })}
               />
-              {errors.confirmPassword && (
-                <p className="mt-1 text-xs text-red-500">
-                  {errors.confirmPassword.message}
-                </p>
-              )}
             </div>
 
             <button
