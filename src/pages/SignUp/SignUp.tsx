@@ -1,36 +1,9 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import type { SubmitHandler } from 'react-hook-form';
-import { useAuth } from '../../hooks/useAuth';
-import Navbar from '../../components/Navbar';
-
-interface FormInputs {
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
+import { Link } from 'react-router-dom';
+import { Navbar } from '../../components/Navbar';
+import { useSignUp } from './useSignUp';
 
 export const SignUp = () => {
-  const { setIsAuthenticated, setCurrentUser } = useAuth();
-  const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-  } = useForm<FormInputs>();
-
-  const password = watch('password');
-
-  const onSubmit: SubmitHandler<FormInputs> = (data) => {
-    const { email } = data;
-
-    // Simulating an API call here
-    setIsAuthenticated(true);
-    setCurrentUser({ email });
-    navigate('/');
-  };
+  const { register, handleSubmit, errors, password, onSubmit } = useSignUp();
 
   return (
     <>

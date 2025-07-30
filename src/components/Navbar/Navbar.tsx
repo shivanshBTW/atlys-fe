@@ -1,14 +1,8 @@
 import { Link } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
+import { useNavbar } from './useNavbar';
 
-const Navbar = () => {
-  const { isAuthenticated, setIsAuthenticated, currentUser, setCurrentUser } =
-    useAuth();
-
-  const handleLogout = () => {
-    setIsAuthenticated(false);
-    setCurrentUser(null);
-  };
+export const Navbar = () => {
+  const { isAuthenticated, currentUser, handleLogout } = useNavbar();
 
   return (
     <nav className="bg-white shadow-md animate-slideDown">
@@ -53,5 +47,3 @@ const Navbar = () => {
     </nav>
   );
 };
-
-export default Navbar;

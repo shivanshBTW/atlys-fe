@@ -1,45 +1,9 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import type { SubmitHandler } from 'react-hook-form';
-import { useAuth } from '../../hooks/useAuth';
-import Navbar from '../../components/Navbar';
-
-interface FormInputs {
-  email: string;
-  password: string;
-}
+import { Link } from 'react-router-dom';
+import { Navbar } from '../../components/Navbar';
+import { useSignIn } from './useSignIn';
 
 export const SignIn = () => {
-  const { setIsAuthenticated, setCurrentUser } = useAuth();
-  const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormInputs>();
-
-  // Test accounts
-  const testAccounts = [
-    { email: 'demo@example.com', password: 'password123' },
-    { email: 'test@user.com', password: 'testpass' },
-  ];
-
-  const onSubmit: SubmitHandler<FormInputs> = (data) => {
-    const { email, password } = data;
-
-    // Simple authentication check
-    const isValid = testAccounts.some(
-      (account) => account.email === email && account.password === password
-    );
-
-    if (isValid) {
-      setIsAuthenticated(true);
-      setCurrentUser({ email });
-      navigate('/');
-    } else {
-      alert('Invalid credentials. Please try again.');
-    }
-  };
+  const { register, handleSubmit, errors, onSubmit } = useSignIn();
 
   return (
     <>
