@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar';
 import { useSignIn } from './useSignIn';
+import { TextField } from '../../components/common/TextField';
 
 export const SignIn = () => {
   const { register, handleSubmit, errors, onSubmit } = useSignIn();
@@ -17,19 +18,11 @@ export const SignIn = () => {
 
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Email
-              </label>
-              <input
-                id="email"
+              <TextField
+                label="Email"
                 type="email"
-                className={`w-full px-3 py-2 border ${
-                  errors.email ? 'border-red-500' : 'border-gray-300'
-                } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                 placeholder="your@email.com"
+                error={errors.email?.message}
                 {...register('email', {
                   required: 'Email is required',
                   pattern: {
@@ -38,32 +31,14 @@ export const SignIn = () => {
                   },
                 })}
               />
-              {errors.email && (
-                <p className="mt-1 text-xs text-red-500">
-                  {errors.email.message}
-                </p>
-              )}
             </div>
 
             <div className="mb-6">
-              <div className="flex justify-between items-center mb-1">
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Password
-                </label>
-                <a href="#" className="text-xs text-blue-600 hover:underline">
-                  Forgot password?
-                </a>
-              </div>
-              <input
-                id="password"
+              <TextField
+                label="Password"
                 type="password"
-                className={`w-full px-3 py-2 border ${
-                  errors.password ? 'border-red-500' : 'border-gray-300'
-                } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                 placeholder="••••••••"
+                error={errors.password?.message}
                 {...register('password', {
                   required: 'Password is required',
                   minLength: {
@@ -72,11 +47,11 @@ export const SignIn = () => {
                   },
                 })}
               />
-              {errors.password && (
-                <p className="mt-1 text-xs text-red-500">
-                  {errors.password.message}
-                </p>
-              )}
+              <div className="flex justify-end items-center mb-1">
+                <a href="#" className="text-xs text-blue-600 hover:underline">
+                  Forgot password?
+                </a>
+              </div>
             </div>
 
             <button
