@@ -17,14 +17,12 @@ export const PostForm = ({
   handleFeatureClick,
 }: PostFormProps) => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 mb-8">
+    <div className="bg-white rounded-lg shadow p-4 mb-8">
       <form onSubmit={handleSubmit}>
         <textarea
-          className={`w-full border ${
-            errors.content ? 'border-red-500' : 'border-gray-300'
-          } rounded-md p-3 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+          className="w-full border border-gray-200 rounded-lg p-4 mb-3 focus:outline-none focus:ring-1 focus:ring-blue-500 resize-none"
           placeholder="What's on your mind?"
-          rows={3}
+          rows={4}
           onClick={() => handleInteraction()}
           {...register('content')}
         ></textarea>
@@ -34,25 +32,25 @@ export const PostForm = ({
           </p>
         )}
 
-        <div className="flex justify-between items-center">
-          <div className="flex space-x-2">
+        <div className="flex justify-between items-center mt-2">
+          <div className="flex space-x-3">
             <button
               type="button"
-              className="text-gray-500 hover:text-gray-700 p-2 rounded-full"
+              className="text-gray-500 hover:text-gray-700"
               onClick={handleFeatureClick}
             >
               📷
             </button>
             <button
               type="button"
-              className="text-gray-500 hover:text-gray-700 p-2 rounded-full"
+              className="text-gray-500 hover:text-gray-700"
               onClick={handleFeatureClick}
             >
               😀
             </button>
             <button
               type="button"
-              className="text-gray-500 hover:text-gray-700 p-2 rounded-full"
+              className="text-gray-500 hover:text-gray-700"
               onClick={handleFeatureClick}
             >
               📎
@@ -61,7 +59,7 @@ export const PostForm = ({
 
           <button
             type="submit"
-            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+            className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors"
             onClick={(e) => {
               if (!handleInteraction()) e.preventDefault();
             }}

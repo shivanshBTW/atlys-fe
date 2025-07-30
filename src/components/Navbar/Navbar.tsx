@@ -5,9 +5,9 @@ export const Navbar = () => {
   const { isAuthenticated, currentUser, handleLogout } = useNavbar();
 
   return (
-    <nav className="bg-white shadow-md animate-slideDown">
+    <nav className="bg-white border-b border-gray-200 py-4">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center">
           <div className="flex items-center">
             <Link to="/" className="text-xl font-bold text-blue-600">
               Atlys

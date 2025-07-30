@@ -7,9 +7,9 @@ interface PostItemProps {
 
 export const PostItem = ({ post, handleFeatureClick }: PostItemProps) => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 animate-slideUp">
+    <div className="bg-white rounded-lg shadow p-4 mb-4">
       <div className="flex items-center mb-3">
-        <div className="w-10 h-10 bg-gray-300 rounded-full mr-3"></div>
+        <div className="w-12 h-12 bg-gray-300 rounded-full mr-3"></div>
         <div>
           <h3 className="font-medium">{post.author}</h3>
           <p className="text-xs text-gray-500">{post.timestamp}</p>
@@ -18,12 +18,12 @@ export const PostItem = ({ post, handleFeatureClick }: PostItemProps) => {
 
       <p className="mb-4">{post.content}</p>
 
-      <div className="flex justify-between text-sm text-gray-500">
+      <div className="flex justify-start space-x-6 text-sm text-gray-500">
         <button
           className="flex items-center space-x-1 hover:text-blue-600"
           onClick={handleFeatureClick}
         >
-          <span>👍</span>
+          <span className="text-yellow-500">👍</span>
           <span>{post.likes}</span>
         </button>
 
