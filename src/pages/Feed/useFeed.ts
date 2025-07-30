@@ -14,6 +14,7 @@ export interface Post {
 
 export interface PostFormInput {
   content: string;
+  format?: string;
 }
 
 // Sample initial posts
@@ -78,7 +79,8 @@ export const useFeed = () => {
   };
 
   const handleFeatureClick = () => {
-    alert('This feature is not implemented yet');
+    // Feature not implemented yet, but no alert to avoid disrupting UX
+    console.log('Feature not implemented yet');
   };
 
   return {
