@@ -12,7 +12,7 @@ export interface Post {
   likes: number;
 }
 
-interface PostFormInput {
+export interface PostFormInput {
   content: string;
 }
 
