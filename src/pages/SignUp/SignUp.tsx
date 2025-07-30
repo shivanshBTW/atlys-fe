@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar';
 import { useSignUp } from './useSignUp';
+import { TextField } from '../../components/common/TextField';
 
 export const SignUp = () => {
   const { register, handleSubmit, errors, password, onSubmit } = useSignUp();
@@ -17,19 +18,11 @@ export const SignUp = () => {
 
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Full Name
-              </label>
-              <input
-                id="name"
+              <TextField
+                label="Full Name"
                 type="text"
-                className={`w-full px-3 py-2 border ${
-                  errors.name ? 'border-red-500' : 'border-gray-300'
-                } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                 placeholder="John Doe"
+                error={errors.name?.message}
                 {...register('name', {
                   required: 'Full name is required',
                   minLength: {
@@ -38,11 +31,6 @@ export const SignUp = () => {
                   },
                 })}
               />
-              {errors.name && (
-                <p className="mt-1 text-xs text-red-500">
-                  {errors.name.message}
-                </p>
-              )}
             </div>
 
             <div className="mb-4">
