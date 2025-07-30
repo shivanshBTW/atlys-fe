@@ -1,16 +1,25 @@
-import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import type { SubmitHandler } from 'react-hook-form';
 import { useAuth } from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
-interface SignInFormInputs {
+export interface SignInFormInputs {
   email: string;
   password: string;
 }
 
-export const useSignIn = () => {
-  const { setIsAuthenticated, setCurrentUser } = useAuth();
+interface UseSignInFormProps {
+  isModal?: boolean;
+  onSuccess?: () => void;
+}
+
+export const useSignInForm = ({
+  isModal = false,
+  onSuccess,
+}: UseSignInFormProps = {}) => {
+  const { setIsAuthenticated, setCurrentUser, setShowAuthModal } = useAuth();
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -34,7 +43,16 @@ export const useSignIn = () => {
     if (isValid) {
       setIsAuthenticated(true);
       setCurrentUser({ email });
-      navigate('/');
+
+      if (isModal) {
+        setShowAuthModal(false);
+      } else {
+        navigate('/');
+      }
+
+      if (onSuccess) {
+        onSuccess();
+      }
     } else {
       alert('Invalid credentials. Please try again.');
     }

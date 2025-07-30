@@ -1,11 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar';
-import { useSignIn } from './useSignIn';
-import { TextField } from '../../components/common/TextField';
+import { SignInForm } from '../../components/SignInForm';
 
 export const SignIn = () => {
-  const { register, handleSubmit, errors, onSubmit } = useSignIn();
-
   return (
     <>
       <Navbar />
@@ -16,51 +13,7 @@ export const SignIn = () => {
             <p className="text-gray-600 mt-2">Sign in to continue to Atlys</p>
           </div>
 
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="mb-4">
-              <TextField
-                label="Email"
-                type="email"
-                placeholder="your@email.com"
-                error={errors.email?.message}
-                {...register('email', {
-                  required: 'Email is required',
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: 'Invalid email address',
-                  },
-                })}
-              />
-            </div>
-
-            <div className="mb-6">
-              <TextField
-                label="Password"
-                type="password"
-                placeholder="••••••••"
-                error={errors.password?.message}
-                {...register('password', {
-                  required: 'Password is required',
-                  minLength: {
-                    value: 6,
-                    message: 'Password must be at least 6 characters',
-                  },
-                })}
-              />
-              <div className="flex justify-end items-center mb-1">
-                <a href="#" className="text-xs text-blue-600 hover:underline">
-                  Forgot password?
-                </a>
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors"
-            >
-              Sign In
-            </button>
-          </form>
+          <SignInForm />
 
           <div className="mt-6 text-center">
             <p className="text-gray-600">
