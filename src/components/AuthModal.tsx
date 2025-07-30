@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import type { SubmitHandler } from 'react-hook-form';
-import { motion } from 'framer-motion';
 import { useAuth } from '../hooks/useAuth';
 
 interface FormInputs {
@@ -42,18 +41,8 @@ const AuthModal = () => {
   };
 
   return (
-    <motion.div
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <motion.div
-        className="bg-white rounded-lg p-6 w-full max-w-md"
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 0.1 }}
-      >
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 animate-fadeIn">
+      <div className="bg-white rounded-lg p-6 w-full max-w-md animate-scaleIn opacity-0">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold">
             {isSignIn ? 'Sign In' : 'Sign Up'}
@@ -141,8 +130,8 @@ const AuthModal = () => {
               : 'Already have an account? Sign in'}
           </button>
         </div>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 };
 

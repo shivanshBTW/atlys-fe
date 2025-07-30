@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import type { SubmitHandler } from 'react-hook-form';
 import { useAuth } from '../../hooks/useAuth';
@@ -150,12 +149,9 @@ export const Feed = () => {
         {/* Posts feed */}
         <div className="space-y-6">
           {posts.map((post) => (
-            <motion.div
+            <div
               key={post.id}
-              className="bg-white rounded-lg shadow-md p-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
+              className="bg-white rounded-lg shadow-md p-4 animate-slideUp"
             >
               <div className="flex items-center mb-3">
                 <div className="w-10 h-10 bg-gray-300 rounded-full mr-3"></div>
@@ -190,7 +186,7 @@ export const Feed = () => {
                   🔄 Share
                 </button>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

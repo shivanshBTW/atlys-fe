@@ -1,5 +1,4 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import type { SubmitHandler } from 'react-hook-form';
 import { useAuth } from '../../hooks/useAuth';
@@ -45,18 +44,8 @@ export const SignIn = () => {
   return (
     <>
       <Navbar />
-      <motion.div
-        className="min-h-screen flex items-center justify-center bg-gray-100 p-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      >
-        <motion.div
-          className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md"
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.1 }}
-        >
+      <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4 animate-fadeIn">
+        <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md animate-scaleIn opacity-0">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold">Welcome Back</h1>
             <p className="text-gray-600 mt-2">Sign in to continue to Atlys</p>
@@ -149,8 +138,8 @@ export const SignIn = () => {
               Policy
             </p>
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </>
   );
 };

@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { useAuth } from '../hooks/useAuth';
 
 const Navbar = () => {
@@ -12,12 +11,7 @@ const Navbar = () => {
   };
 
   return (
-    <motion.nav
-      className="bg-white shadow-md"
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.3 }}
-    >
+    <nav className="bg-white shadow-md animate-slideDown">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
@@ -56,7 +50,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-    </motion.nav>
+    </nav>
   );
 };
 
