@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import type { SubmitHandler } from 'react-hook-form';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../../hooks/useAuth';
 
 interface FormInputs {
   email: string;
   password: string;
 }
 
-const AuthModal = () => {
+export const AuthModal = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const { setShowAuthModal, setIsAuthenticated, setCurrentUser } = useAuth();
   const {
@@ -134,5 +134,3 @@ const AuthModal = () => {
     </div>
   );
 };
-
-export default AuthModal;
