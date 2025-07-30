@@ -1,6 +1,7 @@
 import { Navbar } from '../../components/Navbar';
 import { PageHeader } from '../../components/common';
-import { PostForm, PostList } from './items';
+import { PostForm } from './items/PostForm';
+import { PostList } from './items/PostList';
 import { useFeed } from './useFeed';
 
 export const Feed = () => {
