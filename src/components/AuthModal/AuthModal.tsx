@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { SignInForm } from '../SignInForm';
+import { SignUpForm } from '../SignUpForm';
 
 export const AuthModal = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -24,7 +25,7 @@ export const AuthModal = () => {
         {isSignIn ? (
           <SignInForm isModal={true} />
         ) : (
-          <div>Sign up form will go here</div>
+          <SignUpForm isModal={true} />
         )}
 
         <div className="mt-4 text-center">

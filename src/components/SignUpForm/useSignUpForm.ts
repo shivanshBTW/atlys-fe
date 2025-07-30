@@ -1,18 +1,27 @@
-import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import type { SubmitHandler } from 'react-hook-form';
 import { useAuth } from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
-interface SignUpFormInputs {
+export interface SignUpFormInputs {
   name: string;
   email: string;
   password: string;
   confirmPassword: string;
 }
 
-export const useSignUp = () => {
-  const { setIsAuthenticated, setCurrentUser } = useAuth();
+interface UseSignUpFormProps {
+  isModal?: boolean;
+  onSuccess?: () => void;
+}
+
+export const useSignUpForm = ({
+  isModal = false,
+  onSuccess,
+}: UseSignUpFormProps = {}) => {
+  const { setIsAuthenticated, setCurrentUser, setShowAuthModal } = useAuth();
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -28,7 +37,16 @@ export const useSignUp = () => {
     // Simulating an API call here
     setIsAuthenticated(true);
     setCurrentUser({ email });
-    navigate('/');
+
+    if (isModal) {
+      setShowAuthModal(false);
+    } else {
+      navigate('/');
+    }
+
+    if (onSuccess) {
+      onSuccess();
+    }
   };
 
   return {
