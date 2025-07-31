@@ -14,9 +14,7 @@ export const FormatItem = ({
   return (
     <button
       type="button"
-      className={`p-2 rounded ${
-        isActive ? 'bg-gray-200' : 'hover:bg-gray-100'
-      }`}
+      className={`p-2 rounded ${isActive ? 'bg-white' : 'hover:bg-gray-100'}`}
       title="Numbered List"
       {...rest}
     >
