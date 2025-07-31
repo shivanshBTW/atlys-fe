@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { UseFormRegister, FieldErrors } from 'react-hook-form';
-import type { PostFormInput, ResetEditorFunction } from '../useFeed';
+import type { PostFormInput, ResetEditorFunction } from '../../useFeed';
 import EmojiPicker from 'emoji-picker-react';
 import type { EmojiClickData } from 'emoji-picker-react';
 
@@ -25,7 +25,18 @@ import {
   MdAttachFile,
   MdSend,
 } from 'react-icons/md';
-import { TbH1, TbH2 } from 'react-icons/tb';
+import {
+  TbBold,
+  TbCode,
+  TbH1,
+  TbH2,
+  TbItalic,
+  TbList,
+  TbListNumbers,
+  TbTrash,
+  TbUnderline,
+} from 'react-icons/tb';
+import { FormatItem } from './items/FormatItem';
 
 interface PostFormProps {
   register: UseFormRegister<PostFormInput>;
@@ -105,114 +116,89 @@ export const PostForm = ({
       >
         <div className="mb-4 ">
           {/* TipTap Menu */}
-          <div className="flex items-center bg-[#00000008] rounded-[10px] p-1">
-            <div className="flex space-x-2">
-              <button
-                type="button"
-                onClick={() =>
-                  editor?.chain().focus().toggleHeading({ level: 1 }).run()
-                }
-                className={`p-2 rounded ${
-                  editor?.isActive('heading', { level: 1 })
-                    ? 'bg-gray-200'
-                    : 'hover:bg-gray-100'
-                }`}
-                title="Heading 1"
-              >
-                <TbH1 size={20} />
-              </button>
-              <button
-                type="button"
-                onClick={() =>
-                  editor?.chain().focus().toggleHeading({ level: 2 }).run()
-                }
-                className={`p-2 rounded ${
-                  editor?.isActive('heading', { level: 2 })
-                    ? 'bg-gray-200'
-                    : 'hover:bg-gray-100'
-                }`}
-                title="Heading 2"
-              >
-                <TbH2 size={20} />
-              </button>
+          <div className="flex items-center justify-between ">
+            <div className="flex items-center bg-[#00000008] rounded-[10px] p-1 w-fit">
+              <div className="flex space-x-2">
+                <FormatItem
+                  isActive={editor?.isActive('heading', { level: 1 })}
+                  title="Heading 1"
+                  onClick={() =>
+                    editor?.chain().focus().toggleHeading({ level: 1 }).run()
+                  }
+                >
+                  <TbH1 size={20} />
+                </FormatItem>
+                <FormatItem
+                  isActive={editor?.isActive('heading', { level: 2 })}
+                  title="Heading 2"
+                  onClick={() =>
+                    editor?.chain().focus().toggleHeading({ level: 2 }).run()
+                  }
+                >
+                  <TbH2 size={20} />
+                </FormatItem>
+              </div>
+
+              <div className="mx-4 flex space-x-2">
+                <FormatItem
+                  isActive={editor?.isActive('bold')}
+                  title="Bold"
+                  onClick={() => editor?.chain().focus().toggleBold().run()}
+                >
+                  <TbBold size={20} />
+                </FormatItem>
+                <FormatItem
+                  isActive={editor?.isActive('italic')}
+                  title="Italic"
+                  onClick={() => editor?.chain().focus().toggleItalic().run()}
+                >
+                  <TbItalic size={20} />
+                </FormatItem>
+                <FormatItem
+                  isActive={editor?.isActive('underline')}
+                  title="Underline"
+                  onClick={() =>
+                    editor?.chain().focus().toggleUnderline().run()
+                  }
+                >
+                  <TbUnderline size={20} />
+                </FormatItem>
+              </div>
+
+              <div className="flex space-x-2">
+                <FormatItem
+                  isActive={editor?.isActive('bulletList')}
+                  title="Bulleted List"
+                  onClick={() =>
+                    editor?.chain().focus().toggleBulletList().run()
+                  }
+                >
+                  <TbList size={20} />
+                </FormatItem>
+
+                <FormatItem
+                  isActive={editor?.isActive('orderedList')}
+                  title="Numbered List"
+                  onClick={() =>
+                    editor?.chain().focus().toggleOrderedList().run()
+                  }
+                >
+                  <TbListNumbers size={20} />
+                </FormatItem>
+                <FormatItem
+                  isActive={editor?.isActive('codeBlock')}
+                  title="Code Block"
+                  onClick={() =>
+                    editor?.chain().focus().toggleCodeBlock().run()
+                  }
+                >
+                  <TbCode size={20} />
+                </FormatItem>
+              </div>
             </div>
 
-            <div className="mx-4 flex space-x-2">
-              <button
-                type="button"
-                onClick={() => editor?.chain().focus().toggleBold().run()}
-                className={`p-2 rounded ${
-                  editor?.isActive('bold') ? 'bg-gray-200' : 'hover:bg-gray-100'
-                }`}
-                title="Bold"
-              >
-                <FaBold size={20} />
-              </button>
-              <button
-                type="button"
-                onClick={() => editor?.chain().focus().toggleItalic().run()}
-                className={`p-2 rounded ${
-                  editor?.isActive('italic')
-                    ? 'bg-gray-200'
-                    : 'hover:bg-gray-100'
-                }`}
-                title="Italic"
-              >
-                <FaItalic size={20} />
-              </button>
-              <button
-                type="button"
-                onClick={() => editor?.chain().focus().toggleUnderline().run()}
-                className={`p-2 rounded ${
-                  editor?.isActive('underline')
-                    ? 'bg-gray-200'
-                    : 'hover:bg-gray-100'
-                }`}
-                title="Underline"
-              >
-                <FaUnderline size={20} />
-              </button>
-            </div>
-
-            <div className="flex space-x-2">
-              <button
-                type="button"
-                onClick={() => editor?.chain().focus().toggleBulletList().run()}
-                className={`p-2 rounded ${
-                  editor?.isActive('bulletList')
-                    ? 'bg-gray-200'
-                    : 'hover:bg-gray-100'
-                }`}
-                title="Bulleted List"
-              >
-                <FaListUl size={20} />
-              </button>
-              <button
-                type="button"
-                onClick={() =>
-                  editor?.chain().focus().toggleOrderedList().run()
-                }
-                className={`p-2 rounded ${
-                  editor?.isActive('orderedList')
-                    ? 'bg-gray-200'
-                    : 'hover:bg-gray-100'
-                }`}
-                title="Numbered List"
-              >
-                <FaListOl size={20} />
-              </button>
-              <button
-                type="button"
-                onClick={() => editor?.chain().focus().toggleCodeBlock().run()}
-                className={`p-2 rounded ${
-                  editor?.isActive('codeBlock')
-                    ? 'bg-gray-200'
-                    : 'hover:bg-gray-100'
-                }`}
-                title="Code Block"
-              >
-                <FaCode size={20} />
-              </button>
+            <div className="flex items-center justify-center bg-[#FF000026] rounded-[10px] p-3 aspect-square">
+              <TbTrash size={20} color="#D83B3B" />
             </div>
           </div>
 
