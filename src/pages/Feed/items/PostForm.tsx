@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import type { UseFormRegister, FieldErrors } from 'react-hook-form';
-import type { PostFormInput } from '../useFeed';
+import type { PostFormInput, ResetEditorFunction } from '../useFeed';
 import EmojiPicker from 'emoji-picker-react';
 import type { EmojiClickData } from 'emoji-picker-react';
 
@@ -34,6 +34,7 @@ interface PostFormProps {
   handleInteraction: () => boolean;
   handleFeatureClick: () => void;
   onContentChange?: (content: string) => void;
+  resetEditorRef?: (resetFn: ResetEditorFunction) => void;
 }
 
 export const PostForm = ({
@@ -43,6 +44,7 @@ export const PostForm = ({
   handleInteraction,
   handleFeatureClick,
   onContentChange,
+  resetEditorRef,
 }: PostFormProps) => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
@@ -72,6 +74,20 @@ export const PostForm = ({
       }
     },
   });
+
+  // Function to reset the editor - wrapped in useCallback to avoid dependency changes
+  const resetEditor = useCallback(() => {
+    if (editor) {
+      editor.commands.clearContent(true);
+    }
+  }, [editor]);
+
+  // Expose the reset function via ref
+  useEffect(() => {
+    if (resetEditorRef) {
+      resetEditorRef(resetEditor);
+    }
+  }, [resetEditorRef, resetEditor]);
 
   const handleEmojiClick = (emojiData: EmojiClickData) => {
     if (editor) {
@@ -252,8 +268,19 @@ export const PostForm = ({
           </div>
 
           <button
-            type="submit"
+            type="button"
             className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors flex items-center"
+            onClick={() => {
+              // Check authentication
+              if (handleInteraction()) {
+                // If authenticated, manually trigger form submission
+                document
+                  .querySelector('form')
+                  ?.dispatchEvent(
+                    new Event('submit', { cancelable: true, bubbles: true })
+                  );
+              }
+            }}
           >
             <MdSend className="w-5 h-5 mr-1" />
             Publish

@@ -17,6 +17,9 @@ export interface PostFormInput {
   format?: string;
 }
 
+// Function to reset the editor - will be passed from the component
+export type ResetEditorFunction = () => void;
+
 // Sample initial posts
 const initialPosts: Post[] = [
   {
@@ -43,6 +46,7 @@ export const useFeed = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm<PostFormInput>({
     defaultValues: {
       content: '',
@@ -58,7 +62,13 @@ export const useFeed = () => {
     return true;
   };
 
+  // Store the reset editor function using state to ensure reactivity
+  const [resetEditorFn, setResetEditorFn] =
+    useState<ResetEditorFunction | null>(null);
+
   const onSubmit: SubmitHandler<PostFormInput> = (data) => {
+    // Log the submission data for debugging
+    console.log('Submitting post:', data);
     // Check authentication before submitting
     if (!isAuthenticated) {
       setShowAuthModal(true);
@@ -79,6 +89,14 @@ export const useFeed = () => {
 
     setPosts([newPost, ...posts]);
     reset();
+
+    // Reset the editor if the function is available
+    if (resetEditorFn) {
+      console.log('Resetting editor');
+      resetEditorFn();
+    } else {
+      console.log('Reset function not available');
+    }
   };
 
   const handleFeatureClick = () => {
@@ -94,5 +112,7 @@ export const useFeed = () => {
     onSubmit,
     handleInteraction,
     handleFeatureClick,
+    setResetEditorFn,
+    setValue,
   };
 };

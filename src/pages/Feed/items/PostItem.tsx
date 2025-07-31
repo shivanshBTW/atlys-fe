@@ -26,8 +26,8 @@ export const PostItem = ({ post, handleFeatureClick }: PostItemProps) => {
           </div>
         </div>
 
-        <div>
-          <p className="">{post.content}</p>
+        <div className="post-content">
+          <div dangerouslySetInnerHTML={{ __html: post.content }} />
         </div>
       </div>
 

@@ -1,3 +1,4 @@
 @import 'tailwindcss';
 @import './animations/index.css';
 @import './tiptap.css';
+@import './post-content.css';

@@ -3,6 +3,7 @@ import { PageHeader } from '../../components/common';
 import { PostForm } from './items/PostForm';
 import { PostList } from './items/PostList';
 import { useFeed } from './useFeed';
+import type { ResetEditorFunction } from './useFeed';
 
 export const Feed = () => {
   const {
@@ -13,6 +14,8 @@ export const Feed = () => {
     onSubmit,
     handleInteraction,
     handleFeatureClick,
+    setResetEditorFn,
+    setValue,
   } = useFeed();
 
   return (
@@ -29,7 +32,12 @@ export const Feed = () => {
           handleFeatureClick={handleFeatureClick}
           onContentChange={(content) => {
             // Update the form value when the editor content changes
-            register('content', { value: content });
+            // Use setValue for dynamic updates
+            setValue('content', content);
+          }}
+          resetEditorRef={(resetFn: ResetEditorFunction) => {
+            // Store the reset function in useFeed
+            setResetEditorFn(resetFn);
           }}
         />
 
