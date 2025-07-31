@@ -84,24 +84,12 @@ export const PostForm = ({
     },
   });
 
-  // Create a form ref to access the form element directly
-  const formRef = useRef<HTMLFormElement>(null);
-
   // Function to reset the editor - wrapped in useCallback to avoid dependency changes
   const resetEditor = useCallback(() => {
     if (editor) {
       editor.commands.clearContent(true);
     }
   }, [editor]);
-
-  // // Custom form submission handler
-  // const handleFormSubmission = useCallback(() => {
-  //   // Check authentication first
-  //   if (isAuthenticated || handleInteraction()) {
-  //     // If authenticated, manually submit the form
-  //     formRef.current?.requestSubmit();
-  //   }
-  // }, [isAuthenticated, handleInteraction]);
 
   // Expose the reset function via ref
   useEffect(() => {
@@ -120,14 +108,15 @@ export const PostForm = ({
 
   const _handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    handleSubmit(e);
+    if (isAuthenticated || handleInteraction()) {
+      handleSubmit(e);
+    }
   };
 
   return (
     <div className="bg-[#00000008] rounded-[20px] shadow p-2 mb-8">
       <form
-        ref={formRef}
-        onSubmit={handleSubmit}
+        onSubmit={_handleSubmit}
         className="bg-white rounded-[18px] shadow p-4 border border-gray-200 focus-within:ring-1 focus-within:ring-blue-500"
       >
         <div className="mb-4 ">
@@ -287,7 +276,6 @@ export const PostForm = ({
           <button
             type="submit"
             className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors flex items-center"
-            // onClick={handleFormSubmission}
           >
             <MdSend className="w-5 h-5 mr-1" />
             Publish
