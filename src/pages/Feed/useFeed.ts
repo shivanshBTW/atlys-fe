@@ -43,13 +43,13 @@ export const useFeed = () => {
     handleSubmit,
     formState: { errors },
     reset,
-    setFocus,
   } = useForm<PostFormInput>({
     defaultValues: {
       content: '',
     },
   });
 
+  // Check authentication and show modal if needed
   const handleInteraction = () => {
     if (!isAuthenticated) {
       setShowAuthModal(true);
@@ -59,7 +59,11 @@ export const useFeed = () => {
   };
 
   const onSubmit: SubmitHandler<PostFormInput> = (data) => {
-    if (!handleInteraction()) return;
+    // Check authentication before submitting
+    if (!isAuthenticated) {
+      setShowAuthModal(true);
+      return;
+    }
 
     const { content } = data;
 
@@ -75,7 +79,6 @@ export const useFeed = () => {
 
     setPosts([newPost, ...posts]);
     reset();
-    setFocus('content');
   };
 
   const handleFeatureClick = () => {

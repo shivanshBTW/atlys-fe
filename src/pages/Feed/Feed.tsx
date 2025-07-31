@@ -27,6 +27,10 @@ export const Feed = () => {
           handleSubmit={handleSubmit(onSubmit)}
           handleInteraction={handleInteraction}
           handleFeatureClick={handleFeatureClick}
+          onContentChange={(content) => {
+            // Update the form value when the editor content changes
+            register('content', { value: content });
+          }}
         />
 
         <PostList posts={posts} handleFeatureClick={handleFeatureClick} />
