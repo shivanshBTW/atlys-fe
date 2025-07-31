@@ -1,20 +1,17 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import type { UseFormRegister, FieldErrors } from 'react-hook-form';
-import type { PostFormInput, ResetEditorFunction } from '../../useFeed';
-import EmojiPicker from 'emoji-picker-react';
-import type { EmojiClickData } from 'emoji-picker-react';
-import { useAuth } from '../../../../hooks/useAuth';
 
-// TipTap imports
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
 import Placeholder from '@tiptap/extension-placeholder';
 
-// React Icons
 import { MdImage, MdAttachFile } from 'react-icons/md';
-import { FormatSelector } from './items/FormatSelector';
 import { BiSolidSend } from 'react-icons/bi';
+
+import type { PostFormInput, ResetEditorFunction } from '../../useFeed';
+import { useAuth } from '../../../../hooks/useAuth';
+import { FormatSelector } from './items/FormatSelector';
 import { EmojiSelector } from './items/EmojiSelector';
 import { FormButton } from './items/FormButton';
 
