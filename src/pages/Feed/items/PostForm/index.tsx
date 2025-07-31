@@ -3,6 +3,7 @@ import type { UseFormRegister, FieldErrors } from 'react-hook-form';
 import type { PostFormInput, ResetEditorFunction } from '../../useFeed';
 import EmojiPicker from 'emoji-picker-react';
 import type { EmojiClickData } from 'emoji-picker-react';
+import { useAuth } from '../../../../hooks/useAuth';
 
 // TipTap imports
 import { useEditor, EditorContent } from '@tiptap/react';
@@ -11,14 +12,6 @@ import Underline from '@tiptap/extension-underline';
 import Placeholder from '@tiptap/extension-placeholder';
 
 // React Icons
-import {
-  FaBold,
-  FaItalic,
-  FaUnderline,
-  FaCode,
-  FaListUl,
-  FaListOl,
-} from 'react-icons/fa';
 import {
   MdImage,
   MdOutlineEmojiEmotions,
@@ -59,8 +52,11 @@ export const PostForm = ({
 }: PostFormProps) => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
-  // Track if authentication has been checked
-  const [authCheckDone, setAuthCheckDone] = useState(false);
+  // Get authentication state directly from context
+  const { isAuthenticated } = useAuth();
+
+  // Force component to update when editor state changes
+  const [, setEditorState] = useState(0);
 
   // Initialize TipTap editor
   const editor = useEditor({
@@ -76,12 +72,14 @@ export const PostForm = ({
       if (onContentChange) {
         onContentChange(html);
       }
+
+      // Force component to update to reflect new formatting state
+      setEditorState((prev) => prev + 1);
     },
     onFocus: () => {
-      // Only check authentication once
-      if (!authCheckDone) {
+      // Always check authentication on focus
+      if (!isAuthenticated) {
         handleInteraction();
-        setAuthCheckDone(true);
       }
     },
   });
@@ -120,20 +118,22 @@ export const PostForm = ({
             <div className="flex items-center bg-[#00000008] rounded-[10px] p-1 w-fit">
               <div className="flex space-x-2">
                 <FormatItem
-                  isActive={editor?.isActive('heading', { level: 1 })}
+                  isActive={!!editor?.isActive('heading', { level: 1 })}
                   title="Heading 1"
-                  onClick={() =>
-                    editor?.chain().focus().toggleHeading({ level: 1 }).run()
-                  }
+                  onClick={() => {
+                    editor?.chain().focus().toggleHeading({ level: 1 }).run();
+                    setEditorState((prev) => prev + 1);
+                  }}
                 >
                   <TbH1 size={20} />
                 </FormatItem>
                 <FormatItem
-                  isActive={editor?.isActive('heading', { level: 2 })}
+                  isActive={!!editor?.isActive('heading', { level: 2 })}
                   title="Heading 2"
-                  onClick={() =>
-                    editor?.chain().focus().toggleHeading({ level: 2 }).run()
-                  }
+                  onClick={() => {
+                    editor?.chain().focus().toggleHeading({ level: 2 }).run();
+                    setEditorState((prev) => prev + 1);
+                  }}
                 >
                   <TbH2 size={20} />
                 </FormatItem>
@@ -141,25 +141,32 @@ export const PostForm = ({
 
               <div className="mx-4 flex space-x-2">
                 <FormatItem
-                  isActive={editor?.isActive('bold')}
+                  isActive={!!editor?.isActive('bold')}
                   title="Bold"
-                  onClick={() => editor?.chain().focus().toggleBold().run()}
+                  onClick={() => {
+                    editor?.chain().focus().toggleBold().run();
+                    setEditorState((prev) => prev + 1);
+                  }}
                 >
                   <TbBold size={20} />
                 </FormatItem>
                 <FormatItem
-                  isActive={editor?.isActive('italic')}
+                  isActive={!!editor?.isActive('italic')}
                   title="Italic"
-                  onClick={() => editor?.chain().focus().toggleItalic().run()}
+                  onClick={() => {
+                    editor?.chain().focus().toggleItalic().run();
+                    setEditorState((prev) => prev + 1);
+                  }}
                 >
                   <TbItalic size={20} />
                 </FormatItem>
                 <FormatItem
-                  isActive={editor?.isActive('underline')}
+                  isActive={!!editor?.isActive('underline')}
                   title="Underline"
-                  onClick={() =>
-                    editor?.chain().focus().toggleUnderline().run()
-                  }
+                  onClick={() => {
+                    editor?.chain().focus().toggleUnderline().run();
+                    setEditorState((prev) => prev + 1);
+                  }}
                 >
                   <TbUnderline size={20} />
                 </FormatItem>
@@ -167,30 +174,33 @@ export const PostForm = ({
 
               <div className="flex space-x-2">
                 <FormatItem
-                  isActive={editor?.isActive('bulletList')}
+                  isActive={!!editor?.isActive('bulletList')}
                   title="Bulleted List"
-                  onClick={() =>
-                    editor?.chain().focus().toggleBulletList().run()
-                  }
+                  onClick={() => {
+                    editor?.chain().focus().toggleBulletList().run();
+                    setEditorState((prev) => prev + 1);
+                  }}
                 >
                   <TbList size={20} />
                 </FormatItem>
 
                 <FormatItem
-                  isActive={editor?.isActive('orderedList')}
+                  isActive={!!editor?.isActive('orderedList')}
                   title="Numbered List"
-                  onClick={() =>
-                    editor?.chain().focus().toggleOrderedList().run()
-                  }
+                  onClick={() => {
+                    editor?.chain().focus().toggleOrderedList().run();
+                    setEditorState((prev) => prev + 1);
+                  }}
                 >
                   <TbListNumbers size={20} />
                 </FormatItem>
                 <FormatItem
-                  isActive={editor?.isActive('codeBlock')}
+                  isActive={!!editor?.isActive('codeBlock')}
                   title="Code Block"
-                  onClick={() =>
-                    editor?.chain().focus().toggleCodeBlock().run()
-                  }
+                  onClick={() => {
+                    editor?.chain().focus().toggleCodeBlock().run();
+                    setEditorState((prev) => prev + 1);
+                  }}
                 >
                   <TbCode size={20} />
                 </FormatItem>
@@ -261,7 +271,7 @@ export const PostForm = ({
             className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors flex items-center"
             onClick={() => {
               // Check authentication
-              if (handleInteraction()) {
+              if (isAuthenticated || handleInteraction()) {
                 // If authenticated, manually trigger form submission
                 document
                   .querySelector('form')
