@@ -98,11 +98,14 @@ export const PostForm = ({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow p-4 mb-8">
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
+    <div className="bg-[#00000008] rounded-[20px] shadow p-2 mb-8">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white rounded-[18px] shadow p-4 border border-gray-200 focus-within:ring-1 focus-within:ring-blue-500"
+      >
+        <div className="mb-4 ">
           {/* TipTap Menu */}
-          <div className="flex items-center border-b border-gray-200 pb-2 mb-3">
+          <div className="flex items-center bg-[#00000008] rounded-[10px] p-1">
             <div className="flex space-x-2">
               <button
                 type="button"
@@ -214,7 +217,7 @@ export const PostForm = ({
           </div>
 
           {/* TipTap Editor */}
-          <div className="border border-gray-200 rounded-lg p-4 mb-3 min-h-[120px] focus-within:ring-1 focus-within:ring-blue-500">
+          <div className="rounded-lg p-4 mb-3 min-h-[120px]">
             <EditorContent editor={editor} />
           </div>
 
