@@ -31,12 +31,9 @@ export const Feed = () => {
           handleInteraction={handleInteraction}
           handleFeatureClick={handleFeatureClick}
           onContentChange={(content) => {
-            // Update the form value when the editor content changes
-            // Use setValue for dynamic updates
             setValue('content', content);
           }}
           resetEditorRef={(resetFn: ResetEditorFunction) => {
-            // Store the reset function in useFeed
             setResetEditorFn(resetFn);
           }}
         />

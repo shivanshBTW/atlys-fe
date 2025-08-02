@@ -62,14 +62,10 @@ export const useFeed = () => {
     return true;
   };
 
-  // Store the reset editor function using state to ensure reactivity
   const [resetEditorFn, setResetEditorFn] =
     useState<ResetEditorFunction | null>(null);
 
   const onSubmit: SubmitHandler<PostFormInput> = (data) => {
-    // Log the submission data for debugging
-    console.log('Submitting post:', data);
-    // Check authentication before submitting
     if (!isAuthenticated) {
       setShowAuthModal(true);
       return;
@@ -90,18 +86,14 @@ export const useFeed = () => {
     setPosts([newPost, ...posts]);
     reset();
 
-    // Reset the editor if the function is available
     if (resetEditorFn) {
-      console.log('Resetting editor');
       resetEditorFn();
-    } else {
-      console.log('Reset function not available');
     }
   };
 
   const handleFeatureClick = () => {
-    // Feature not implemented yet, but no alert to avoid disrupting UX
     console.log('Feature not implemented yet');
+    alert('Feature not implemented yet');
   };
 
   return {
