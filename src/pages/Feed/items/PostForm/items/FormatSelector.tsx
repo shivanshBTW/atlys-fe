@@ -23,7 +23,7 @@ export const FormatSelector = ({
   setEditorState,
 }: FormatSelectorProps) => {
   return (
-    <div className="flex items-center justify-between ">
+    <div className="flex items-center justify-between overflow-x-auto gap-x-4">
       <div className="flex items-center bg-[#00000008] rounded-[10px] p-1 w-fit">
         <div className="flex space-x-2">
           <FormatItem
