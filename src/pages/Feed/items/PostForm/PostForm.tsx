@@ -12,9 +12,9 @@ import { BiSolidSend } from "react-icons/bi";
 import type { PostFormInput, ResetEditorFunction } from "../../useFeed";
 import { useAuth } from "../../../../hooks/useAuth";
 import { FormatSelector } from "./items/FormatSelector";
-import { EmojiSelector } from "./items/EmojiSelector";
 import { FormButton } from "./items/FormButton";
 import { handleFeatureNotImplemented } from "../../../../utils/common";
+import { TbMoodSmileBeam } from "react-icons/tb";
 
 interface PostFormProps {
   register: UseFormRegister<PostFormInput>;
@@ -32,7 +32,6 @@ export const PostForm = ({
   onContentChange,
   resetEditorRef,
 }: PostFormProps) => {
-  const [selectedEmoji, setSelectedEmoji] = useState<string | null>(null);
   const { isAuthenticated } = useAuth();
 
   // Force component to update when editor state changes
@@ -90,9 +89,11 @@ export const PostForm = ({
           <FormatSelector editor={editor} setEditorState={setEditorState} />
 
           <div className="flex min-h-[120px] flex-row justify-between gap-2 rounded-lg px-1 py-2">
-            <EmojiSelector
-              selectedEmoji={selectedEmoji}
-              setSelectedEmoji={setSelectedEmoji}
+            <TbMoodSmileBeam
+              size={20}
+              color="#000"
+              className="my-2"
+              onClick={handleFeatureNotImplemented}
             />
 
             <div className="max-w-[95%] grow py-1">
