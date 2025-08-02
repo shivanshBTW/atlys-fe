@@ -1,43 +1,43 @@
 import { Link } from 'react-router-dom';
 import { useNavbar } from './useNavbar';
+import { TbCreativeCommons, TbLogout } from 'react-icons/tb';
 
 export const Navbar = () => {
-  const { isAuthenticated, currentUser, handleLogout } = useNavbar();
+  const { isAuthenticated, handleLogout } = useNavbar();
 
   return (
-    <nav className="bg-white border-b border-gray-200 py-4">
+    <nav className="py-4">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-            <Link to="/" className="text-xl font-bold text-blue-600">
-              Atlys
+            <Link
+              to="/"
+              className="text-md font-bold flex flex-row items-center gap-1"
+            >
+              <TbCreativeCommons size={30} />
+              Foo-Rum
             </Link>
           </div>
 
           <div className="flex items-center">
             {isAuthenticated ? (
               <div className="flex items-center space-x-4">
-                <span className="text-gray-700">{currentUser?.email}</span>
+                {/* <span className="text-gray-700">{currentUser?.email}</span> */}
                 <button
                   onClick={handleLogout}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                  className="transition-colors gap-1 text-sm flex flex-row items-center"
                 >
-                  Logout
+                  Logout <TbLogout size={20} />
                 </button>
               </div>
             ) : (
               <div className="flex items-center space-x-4">
+                {/* <span className="text-gray-700">{currentUser?.email}</span> */}
                 <Link
                   to="/signin"
-                  className="text-gray-700 hover:text-blue-600 transition-colors"
+                  className="transition-colors gap-1 text-sm flex flex-row items-center"
                 >
-                  Sign In
-                </Link>
-                <Link
-                  to="/signup"
-                  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
-                >
-                  Sign Up
+                  Login <TbLogout size={20} />
                 </Link>
               </div>
             )}
