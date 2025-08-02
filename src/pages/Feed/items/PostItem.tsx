@@ -26,7 +26,7 @@ export const PostItem = ({ post, handleFeatureClick }: PostItemProps) => {
           </div>
         </div>
 
-        <div className="post-content">
+        <div className="post-content max-w-full break-words">
           <div dangerouslySetInnerHTML={{ __html: post.content }} />
         </div>
       </div>
@@ -37,7 +37,6 @@ export const PostItem = ({ post, handleFeatureClick }: PostItemProps) => {
           onClick={handleFeatureClick}
         >
           <RiHeart3Line size={16} />
-
           <span>{post.likes}</span>
         </button>
 

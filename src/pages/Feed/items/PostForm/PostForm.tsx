@@ -96,7 +96,7 @@ export const PostForm = ({
               setSelectedEmoji={setSelectedEmoji}
             />
 
-            <div className="grow py-1">
+            <div className="grow py-1  max-w-[95%]">
               <EditorContent editor={editor} />
             </div>
           </div>
