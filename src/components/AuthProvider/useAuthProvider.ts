@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import { AuthContext } from "../context/AuthContext";
-import { AuthModal } from "../components/AuthModal";
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+export const useAuthProvider = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     const stored = localStorage.getItem("isAuthenticated");
     return stored === "true";
@@ -28,19 +26,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [currentUser]);
 
-  return (
-    <AuthContext.Provider
-      value={{
-        isAuthenticated,
-        setIsAuthenticated,
-        showAuthModal,
-        setShowAuthModal,
-        currentUser,
-        setCurrentUser,
-      }}
-    >
-      {showAuthModal && <AuthModal />}
-      {children}
-    </AuthContext.Provider>
-  );
+  return {
+    isAuthenticated,
+    setIsAuthenticated,
+    showAuthModal,
+    setShowAuthModal,
+    currentUser,
+    setCurrentUser,
+  };
 };
