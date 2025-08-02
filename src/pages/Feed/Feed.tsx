@@ -1,5 +1,4 @@
 import { Navbar } from "../../components/Navbar";
-import { PageHeader } from "../../components/common";
 import { PostForm } from "./items/PostForm";
 import { PostList } from "./items/PostList";
 import type { ResetEditorFunction } from "./useFeed";

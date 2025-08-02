@@ -3,10 +3,7 @@ import { useNavbar } from "./useNavbar";
 import { TbCreativeCommons, TbLogout } from "react-icons/tb";
 
 export const Navbar = () => {
-  const { isAuthenticated, handleLogout } = useNavbar();
-  const isLoginPage =
-    window.location.pathname === "/signup" ||
-    window.location.pathname === "/signin";
+  const { isAuthenticated, handleLogout, isLoginPage } = useNavbar();
 
   return (
     <nav className="py-4">

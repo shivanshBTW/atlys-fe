@@ -9,9 +9,14 @@ export const useNavbar = () => {
     setCurrentUser(null);
   };
 
+  const isLoginPage =
+    window.location.pathname === "/signup" ||
+    window.location.pathname === "/signin";
+
   return {
     isAuthenticated,
     currentUser,
     handleLogout,
+    isLoginPage,
   };
 };
