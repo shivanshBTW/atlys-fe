@@ -53,7 +53,6 @@ export const useFeed = () => {
     },
   });
 
-  // Check authentication and show modal if needed
   const handleInteraction = () => {
     if (!isAuthenticated) {
       setShowAuthModal(true);
