@@ -5,7 +5,6 @@ This is a frontend application built for the Atlys Frontend Hiring Task. It's a 
 ## Features
 
 - **Feed Page**: Serves as the landing page
-
   - For unauthenticated users, any interaction triggers a sign in/sign up modal
   - After authentication, users can fully interact with the feed
   - Post Editor with publish functionality

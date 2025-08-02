@@ -1,0 +1,95 @@
+/* TipTap Editor Styles */
+
+/* Basic editor styles */
+.ProseMirror {
+  min-height: 100px;
+  outline: none;
+}
+
+.ProseMirror p {
+  margin: 0.5em 0;
+}
+
+.ProseMirror > *:first-child {
+  margin-top: 0;
+}
+
+.ProseMirror > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Placeholder */
+.ProseMirror p.is-editor-empty:first-child::before {
+  color: #9ca3af;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Headings */
+.ProseMirror h1 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 0.75em;
+  margin-bottom: 0.5em;
+}
+
+.ProseMirror h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-top: 0.75em;
+  margin-bottom: 0.5em;
+}
+
+.ProseMirror h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-top: 0.75em;
+  margin-bottom: 0.5em;
+}
+
+/* Lists */
+.ProseMirror ul,
+.ProseMirror ol {
+  padding-left: 1.5em;
+  margin: 0.5em 0;
+}
+
+.ProseMirror li {
+  margin: 0.2em 0;
+}
+
+.ProseMirror ul li {
+  list-style-type: disc;
+}
+
+.ProseMirror ol li {
+  list-style-type: decimal;
+}
+
+/* Code blocks */
+.ProseMirror pre {
+  background-color: #f1f5f9;
+  border-radius: 0.25rem;
+  padding: 0.75em 1em;
+  margin: 0.5em 0;
+  font-family: monospace;
+  overflow-x: auto;
+}
+
+/* Inline code */
+.ProseMirror code {
+  background-color: #f1f5f9;
+  border-radius: 0.25rem;
+  padding: 0.2em 0.4em;
+  font-family: monospace;
+}
+
+/* Fix emoji picker z-index */
+.EmojiPickerReact {
+  z-index: 50 !important;
+}
