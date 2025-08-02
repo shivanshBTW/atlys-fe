@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import type { SubmitHandler } from 'react-hook-form';
-import { useAuth } from '../../hooks/useAuth';
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import type { SubmitHandler } from "react-hook-form";
+import { useAuth } from "../../hooks/useAuth";
 
 // Sample post type
 export interface Post {
@@ -23,17 +23,17 @@ export type ResetEditorFunction = () => void;
 // Sample initial posts
 const initialPosts: Post[] = [
   {
-    id: '1',
-    author: 'John Doe',
-    content: 'Just joined Atlys! Excited to connect with everyone here.',
-    timestamp: '2 hours ago',
+    id: "1",
+    author: "John Doe",
+    content: "Just joined Atlys! Excited to connect with everyone here.",
+    timestamp: "2 hours ago",
     likes: 15,
   },
   {
-    id: '2',
-    author: 'Jane Smith',
-    content: 'Working on a new project. Will share details soon!',
-    timestamp: '5 hours ago',
+    id: "2",
+    author: "Jane Smith",
+    content: "Working on a new project. Will share details soon!",
+    timestamp: "5 hours ago",
     likes: 24,
   },
 ];
@@ -49,7 +49,7 @@ export const useFeed = () => {
     setValue,
   } = useForm<PostFormInput>({
     defaultValues: {
-      content: '',
+      content: "",
     },
   });
 
@@ -72,13 +72,13 @@ export const useFeed = () => {
 
     const { content } = data;
 
-    if (content.trim() === '') return;
+    if (content.trim() === "") return;
 
     const newPost: Post = {
       id: Date.now().toString(),
-      author: 'You',
+      author: "You",
       content: content,
-      timestamp: 'Just now',
+      timestamp: "Just now",
       likes: 0,
     };
 
@@ -90,11 +90,6 @@ export const useFeed = () => {
     }
   };
 
-  const handleFeatureClick = () => {
-    console.log('Feature not implemented yet');
-    alert('Feature not implemented yet');
-  };
-
   return {
     posts,
     register,
@@ -102,7 +97,6 @@ export const useFeed = () => {
     errors,
     onSubmit,
     handleInteraction,
-    handleFeatureClick,
     setResetEditorFn,
     setValue,
   };
