@@ -1,18 +1,18 @@
-import { useState } from 'react';
-import { useAuth } from '../../hooks/useAuth';
-import { SignInForm } from '../SignInForm';
-import { SignUpForm } from '../SignUpForm';
+import { useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
+import { SignInForm } from "../SignInForm";
+import { SignUpForm } from "../SignUpForm";
 
 export const AuthModal = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const { setShowAuthModal } = useAuth();
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 animate-fadeIn">
-      <div className="bg-white rounded-lg p-6 w-full max-w-md animate-scaleIn opacity-0">
-        <div className="flex justify-between items-center mb-6">
+    <div className="animate-fadeIn fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+      <div className="animate-scaleIn w-full max-w-md rounded-lg bg-white p-6 opacity-0">
+        <div className="mb-6 flex items-center justify-between">
           <h2 className="text-2xl font-bold">
-            {isSignIn ? 'Sign In' : 'Sign Up'}
+            {isSignIn ? "Sign In" : "Sign Up"}
           </h2>
           <button
             onClick={() => setShowAuthModal(false)}
@@ -34,8 +34,8 @@ export const AuthModal = () => {
             className="text-blue-600 hover:underline"
           >
             {isSignIn
-              ? 'Need an account? Sign up'
-              : 'Already have an account? Sign in'}
+              ? "Need an account? Sign up"
+              : "Already have an account? Sign in"}
           </button>
         </div>
       </div>

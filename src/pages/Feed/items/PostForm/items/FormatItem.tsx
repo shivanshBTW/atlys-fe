@@ -1,4 +1,5 @@
-import type { ButtonHTMLAttributes, PropsWithChildren } from 'react';
+import type { ButtonHTMLAttributes, PropsWithChildren } from "react";
+import { cn } from "../../../../../utils/cn";
 
 interface FormatItemProps
   extends PropsWithChildren,
@@ -14,9 +15,10 @@ export const FormatItem = ({
   return (
     <button
       type="button"
-      className={`p-2 rounded ${
-        isActive ? 'bg-white shadow-sm' : 'hover:bg-gray-100'
-      }`}
+      className={cn("rounded p-2", {
+        "bg-white shadow-sm": isActive,
+        "hover:bg-gray-100": !isActive,
+      })}
       {...rest}
     >
       {children}

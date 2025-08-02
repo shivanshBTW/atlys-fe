@@ -1,9 +1,9 @@
-import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Feed } from './pages/Feed';
-import { SignIn } from './pages/SignIn';
-import { SignUp } from './pages/SignUp';
-import { AuthProvider } from './utils/AuthProvider';
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Feed } from "./pages/Feed";
+import { SignIn } from "./pages/SignIn";
+import { SignUp } from "./pages/SignUp";
+import { AuthProvider } from "./utils/AuthProvider";
 
 function App() {
   return (

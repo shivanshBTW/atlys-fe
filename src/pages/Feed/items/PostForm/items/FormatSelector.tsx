@@ -1,5 +1,5 @@
-import type { Editor } from '@tiptap/react';
-import { FormatItem } from './FormatItem';
+import type { Editor } from "@tiptap/react";
+import { FormatItem } from "./FormatItem";
 import {
   TbH1,
   TbH2,
@@ -10,8 +10,8 @@ import {
   TbListNumbers,
   TbCode,
   TbTrash,
-} from 'react-icons/tb';
-import type { Dispatch, SetStateAction } from 'react';
+} from "react-icons/tb";
+import type { Dispatch, SetStateAction } from "react";
 
 interface FormatSelectorProps {
   editor: Editor;
@@ -23,11 +23,11 @@ export const FormatSelector = ({
   setEditorState,
 }: FormatSelectorProps) => {
   return (
-    <div className="flex items-center justify-between overflow-x-auto gap-x-4">
-      <div className="flex items-center bg-[#00000008] rounded-[10px] p-1 w-fit">
+    <div className="flex items-center justify-between gap-x-4 overflow-x-auto">
+      <div className="flex w-fit items-center rounded-[10px] bg-[#00000008] p-1">
         <div className="flex space-x-2">
           <FormatItem
-            isActive={!!editor?.isActive('heading', { level: 1 })}
+            isActive={!!editor?.isActive("heading", { level: 1 })}
             title="Heading 1"
             onClick={() => {
               editor?.chain().focus().toggleHeading({ level: 1 }).run();
@@ -37,7 +37,7 @@ export const FormatSelector = ({
             <TbH1 size={20} />
           </FormatItem>
           <FormatItem
-            isActive={!!editor?.isActive('heading', { level: 2 })}
+            isActive={!!editor?.isActive("heading", { level: 2 })}
             title="Heading 2"
             onClick={() => {
               editor?.chain().focus().toggleHeading({ level: 2 }).run();
@@ -50,7 +50,7 @@ export const FormatSelector = ({
 
         <div className="mx-4 flex space-x-2">
           <FormatItem
-            isActive={!!editor?.isActive('bold')}
+            isActive={!!editor?.isActive("bold")}
             title="Bold"
             onClick={() => {
               editor?.chain().focus().toggleBold().run();
@@ -60,7 +60,7 @@ export const FormatSelector = ({
             <TbBold size={20} />
           </FormatItem>
           <FormatItem
-            isActive={!!editor?.isActive('italic')}
+            isActive={!!editor?.isActive("italic")}
             title="Italic"
             onClick={() => {
               editor?.chain().focus().toggleItalic().run();
@@ -70,7 +70,7 @@ export const FormatSelector = ({
             <TbItalic size={20} />
           </FormatItem>
           <FormatItem
-            isActive={!!editor?.isActive('underline')}
+            isActive={!!editor?.isActive("underline")}
             title="Underline"
             onClick={() => {
               editor?.chain().focus().toggleUnderline().run();
@@ -83,7 +83,7 @@ export const FormatSelector = ({
 
         <div className="flex space-x-2">
           <FormatItem
-            isActive={!!editor?.isActive('bulletList')}
+            isActive={!!editor?.isActive("bulletList")}
             title="Bulleted List"
             onClick={() => {
               editor?.chain().focus().toggleBulletList().run();
@@ -94,7 +94,7 @@ export const FormatSelector = ({
           </FormatItem>
 
           <FormatItem
-            isActive={!!editor?.isActive('orderedList')}
+            isActive={!!editor?.isActive("orderedList")}
             title="Numbered List"
             onClick={() => {
               editor?.chain().focus().toggleOrderedList().run();
@@ -104,7 +104,7 @@ export const FormatSelector = ({
             <TbListNumbers size={20} />
           </FormatItem>
           <FormatItem
-            isActive={!!editor?.isActive('codeBlock')}
+            isActive={!!editor?.isActive("codeBlock")}
             title="Code Block"
             onClick={() => {
               editor?.chain().focus().toggleCodeBlock().run();
@@ -118,7 +118,7 @@ export const FormatSelector = ({
 
       <button
         type="button"
-        className={`p-2 rounded bg-[#FF000026] aspect-square cursor-pointer`}
+        className="aspect-square cursor-pointer rounded bg-[#FF000026] p-2"
         onClick={() => {
           editor?.chain().focus().clearContent().run();
           setEditorState((prev) => prev + 1);

@@ -1,7 +1,7 @@
-import { useForm } from 'react-hook-form';
-import type { SubmitHandler } from 'react-hook-form';
-import { useAuth } from '../../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
+import { useForm } from "react-hook-form";
+import type { SubmitHandler } from "react-hook-form";
+import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 export interface SignInFormInputs {
   email: string;
@@ -28,8 +28,8 @@ export const useSignInForm = ({
 
   // Test accounts
   const testAccounts = [
-    { email: 'demo@example.com', password: 'password123' },
-    { email: 'test@user.com', password: 'testpass' },
+    { email: "demo@example.com", password: "password123" },
+    { email: "test@user.com", password: "testpass" },
   ];
 
   const onSubmit: SubmitHandler<SignInFormInputs> = (data) => {
@@ -37,7 +37,7 @@ export const useSignInForm = ({
 
     // Simple authentication check
     const isValid = testAccounts.some(
-      (account) => account.email === email && account.password === password
+      (account) => account.email === email && account.password === password,
     );
 
     if (isValid) {
@@ -47,14 +47,14 @@ export const useSignInForm = ({
       if (isModal) {
         setShowAuthModal(false);
       } else {
-        navigate('/');
+        navigate("/");
       }
 
       if (onSuccess) {
         onSuccess();
       }
     } else {
-      alert('Invalid credentials. Please try again.');
+      alert("Invalid credentials. Please try again.");
     }
   };
 

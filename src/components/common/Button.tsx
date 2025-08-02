@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes } from 'react';
+import type { ButtonHTMLAttributes } from "react";
 
 export const Button = ({
   children,
@@ -7,7 +7,7 @@ export const Button = ({
 }: ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
     <button
-      className={`w-full bg-[#5057EA] text-white text-sm py-3 rounded-xl hover:bg-blue-700 transition-colors ${className}`}
+      className={`w-full rounded-xl bg-[#5057EA] py-3 text-sm text-white transition-colors hover:bg-blue-700 ${className}`}
       {...rest}
     >
       {children}

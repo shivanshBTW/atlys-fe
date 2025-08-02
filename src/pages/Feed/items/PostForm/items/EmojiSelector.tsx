@@ -1,7 +1,8 @@
-import type { EmojiClickData } from 'emoji-picker-react';
-import EmojiPicker from 'emoji-picker-react';
-import { useState } from 'react';
-import { TbMoodSmileBeam } from 'react-icons/tb';
+import type { EmojiClickData } from "emoji-picker-react";
+import EmojiPicker from "emoji-picker-react";
+import { useState } from "react";
+import { TbMoodSmileBeam } from "react-icons/tb";
+import { cn } from "../../../../../utils/cn";
 
 interface EmojiSelectorProps {
   selectedEmoji: string | null;
@@ -23,11 +24,11 @@ export const EmojiSelector = ({
     <div className="relative h-fit">
       <button
         type="button"
-        className="text-gray-500 hover:text-gray-700 rounded hover:bg-gray-100 p-1"
+        className="rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
         onClick={() => setShowEmojiPicker(!showEmojiPicker)}
       >
         {selectedEmoji ? (
-          <span className="text-gray-500 text-[20px]">{selectedEmoji}</span>
+          <span className="text-[20px] text-gray-500">{selectedEmoji}</span>
         ) : (
           <TbMoodSmileBeam size={20} color="#000" />
         )}
@@ -35,9 +36,12 @@ export const EmojiSelector = ({
 
       {/* Emoji Picker */}
       <div
-        className={`absolute top-full left-0 mt-2 bg-white shadow-lg rounded-lg border border-gray-200 z-10 ${
-          !showEmojiPicker ? 'hidden' : ''
-        }`}
+        className={cn(
+          "absolute top-full left-0 z-10 mt-2 rounded-lg border border-gray-200 bg-white shadow-lg",
+          {
+            hidden: !showEmojiPicker,
+          },
+        )}
       >
         <EmojiPicker
           onEmojiClick={handleEmojiClick}

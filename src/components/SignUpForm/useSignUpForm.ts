@@ -1,7 +1,7 @@
-import { useForm } from 'react-hook-form';
-import type { SubmitHandler } from 'react-hook-form';
-import { useAuth } from '../../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
+import { useForm } from "react-hook-form";
+import type { SubmitHandler } from "react-hook-form";
+import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 export interface SignUpFormInputs {
   name: string;
@@ -29,7 +29,7 @@ export const useSignUpForm = ({
     watch,
   } = useForm<SignUpFormInputs>();
 
-  const password = watch('password');
+  const password = watch("password");
 
   const onSubmit: SubmitHandler<SignUpFormInputs> = (data) => {
     const { email } = data;
@@ -41,7 +41,7 @@ export const useSignUpForm = ({
     if (isModal) {
       setShowAuthModal(false);
     } else {
-      navigate('/');
+      navigate("/");
     }
 
     if (onSuccess) {
