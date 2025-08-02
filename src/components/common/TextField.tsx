@@ -1,4 +1,5 @@
-import type { InputHTMLAttributes } from 'react';
+import type { InputHTMLAttributes } from "react";
+import { cn } from "../../utils/cn";
 
 interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -16,15 +17,16 @@ export const TextField = ({
     <div>
       <label
         htmlFor="name"
-        className="block text-sm font-medium text-gray-700 mb-1"
+        className="mb-1 block text-sm font-semibold text-black"
       >
         {label}
       </label>
       <input
         type={type}
-        className={`w-full px-3 py-2 border ${
-          error ? 'border-red-500' : 'border-gray-300'
-        } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+        className={cn(
+          `w-full rounded-md bg-gray-100 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none`,
+          { "border border-red-500": error },
+        )}
         placeholder={placeholder}
         {...rest}
       />
