@@ -1,17 +1,17 @@
-import { Link } from 'react-router-dom';
-import { Navbar } from '../../components/Navbar';
-import { SignInForm } from '../../components/SignInForm';
-import { TbLogout } from 'react-icons/tb';
+import { TbLogout } from "react-icons/tb";
+import { Link } from "react-router-dom";
+import { Navbar } from "../../components/Navbar";
+import { SignInForm } from "../../components/SignInForm";
 
 export const SignIn = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen flex items-center justify-center bg-white p-4 animate-fadeIn">
-        <div className="bg-gray-100 rounded-[30px] p-3">
-          <div className="bg-white rounded-[21px] p-8 pb-12 w-full max-w-md animate-scaleIn opacity-0 min-w-sm  flex flex-col gap-8">
-            <div className="text-center  flex flex-col gap-2">
-              <div className="size-13 aspect-square bg-gray-100 flex flex-row justify-center items-center rounded-full mx-auto">
+      <div className="animate-fadeIn flex min-h-screen items-center justify-center bg-white p-4">
+        <div className="animate-scaleIn rounded-[30px] bg-gray-100 p-3 opacity-0">
+          <div className="flex w-full max-w-md min-w-sm flex-col gap-8 rounded-[21px] bg-white p-8 pb-12">
+            <div className="flex flex-col gap-2 text-center">
+              <div className="mx-auto flex aspect-square size-13 flex-row items-center justify-center rounded-full bg-gray-100">
                 <TbLogout size={30} />
               </div>
               <div>
@@ -27,7 +27,7 @@ export const SignIn = () => {
 
           <div className="mt-1 py-1 text-center">
             <p className="text-gray-600">
-              Don't have an account?{' '}
+              Don't have an account?{" "}
               <Link to="/signup" className="text-blue-600 hover:underline">
                 Sign up
               </Link>
