@@ -2,43 +2,54 @@ import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { SignInForm } from "../SignInForm";
 import { SignUpForm } from "../SignUpForm";
+import { TbLogout } from "react-icons/tb";
 
 export const AuthModal = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const { setShowAuthModal } = useAuth();
 
   return (
-    <div className="animate-fadeIn fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="animate-scaleIn w-full max-w-md rounded-lg bg-white p-6 opacity-0">
-        <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-2xl font-bold">
-            {isSignIn ? "Sign In" : "Sign Up"}
-          </h2>
-          <button
-            onClick={() => setShowAuthModal(false)}
-            className="text-gray-500 hover:text-gray-700"
-          >
-            ✕
-          </button>
-        </div>
+    <>
+      <div className="animate-fadeIn fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+        <div className="animate-scaleIn rounded-[30px] bg-gray-100 p-3 opacity-0">
+          <div className="flex w-full max-w-xs flex-col gap-8 rounded-[21px] bg-white p-8 pb-12 sm:max-w-md">
+            <button
+              onClick={() => setShowAuthModal(false)}
+              className="absolute top-6 right-6 text-gray-500 hover:text-gray-700"
+            >
+              ✕
+            </button>
+            <div className="flex flex-col gap-2 text-center">
+              <div className="mx-auto flex aspect-square size-13 flex-row items-center justify-center rounded-full bg-gray-100">
+                <TbLogout size={30} />
+              </div>
+              <div>
+                <h1 className="text-xl font-bold">Sign in to continue</h1>
+                <p className="text-sm text-gray-600">
+                  Sign in to access all the features on this app
+                </p>
+              </div>
+            </div>
 
-        {isSignIn ? (
-          <SignInForm isModal={true} />
-        ) : (
-          <SignUpForm isModal={true} />
-        )}
+            {isSignIn ? (
+              <SignInForm isModal={true} />
+            ) : (
+              <SignUpForm isModal={true} />
+            )}
+          </div>
 
-        <div className="mt-4 text-center">
-          <button
-            onClick={() => setIsSignIn(!isSignIn)}
-            className="text-blue-600 hover:underline"
-          >
-            {isSignIn
-              ? "Need an account? Sign up"
-              : "Already have an account? Sign in"}
-          </button>
+          <div className="mt-1 py-1 text-center">
+            <button
+              onClick={() => setIsSignIn(!isSignIn)}
+              className="text-blue-600 hover:underline"
+            >
+              {isSignIn
+                ? "Need an account? Sign up"
+                : "Already have an account? Sign in"}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
