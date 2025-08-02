@@ -1,20 +1,10 @@
-import { useState, useCallback } from "react";
-import { useAuth } from "../../hooks/useAuth";
+import { TbLogout } from "react-icons/tb";
 import { SignInForm } from "../SignInForm";
 import { SignUpForm } from "../SignUpForm";
-import { TbLogout } from "react-icons/tb";
+import { useAuthModal } from "./useAuthModal";
 
 export const AuthModal = () => {
-  const [isSignIn, setIsSignIn] = useState(true);
-  const [isClosing, setIsClosing] = useState(false);
-  const { setShowAuthModal } = useAuth();
-
-  const handleClose = useCallback(() => {
-    setIsClosing(true);
-    setTimeout(() => {
-      setShowAuthModal(false);
-    }, 300); // Same duration as our animations
-  }, [setShowAuthModal]);
+  const { isSignIn, isClosing, handleClose, toggleAuthMode } = useAuthModal();
 
   return (
     <>
@@ -52,7 +42,7 @@ export const AuthModal = () => {
 
           <div className="mt-1 py-1 text-center">
             <button
-              onClick={() => setIsSignIn(!isSignIn)}
+              onClick={toggleAuthMode}
               className="text-blue-600 hover:underline"
             >
               {isSignIn
