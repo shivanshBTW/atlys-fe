@@ -4,6 +4,9 @@ import { TbCreativeCommons, TbLogout } from "react-icons/tb";
 
 export const Navbar = () => {
   const { isAuthenticated, handleLogout } = useNavbar();
+  const isLoginPage =
+    window.location.pathname === "/signup" ||
+    window.location.pathname === "/signin";
 
   return (
     <nav className="py-4">
@@ -29,6 +32,15 @@ export const Navbar = () => {
                 >
                   Logout <TbLogout size={20} />
                 </button>
+              </div>
+            ) : isLoginPage ? (
+              <div className="flex items-center space-x-4">
+                <Link
+                  to="/signup"
+                  className="flex flex-row items-center gap-1 text-sm font-semibold transition-colors"
+                >
+                  Back to Home
+                </Link>
               </div>
             ) : (
               <div className="flex items-center space-x-4">

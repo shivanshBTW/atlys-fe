@@ -21,8 +21,6 @@ export const Feed = () => {
     <>
       <Navbar />
       <div className="mx-auto max-w-2xl p-4">
-        <PageHeader title="Atlys Feed" />
-
         <PostForm
           register={register}
           errors={errors}
