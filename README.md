@@ -20,7 +20,7 @@ This is a frontend application built for the Atlys Frontend Hiring Task. It's a 
 - **Framework**: React with TypeScript
 - **Styling**: TailwindCSS
 - **Routing**: React Router
-- **Animations**: Framer Motion
+- **Animations**: CSS Animations
 
 ## Test Accounts
 
@@ -33,44 +33,32 @@ test@user.com / testpass
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js (v14 or higher)
-- Yarn package manager
-
 ### Installation
 
-1. Clone the repository:
-
-```
-git clone https://github.com/yourusername/atlys-fe.git
-cd atlys-fe
-```
-
-2. Install dependencies:
+1. Install dependencies:
 
 ```
 yarn install
 ```
 
-3. Start the development server:
+2. Start the development server:
 
 ```
 yarn dev
 ```
 
-4. Open your browser and navigate to `http://localhost:5173`
+3. Open your browser and navigate to `http://localhost:5173`
 
 ## Implementation Details
 
-- **State Management**: React Context API for authentication state
+- **State Management**: React Context API for authentication state (Would've used redux if it was more complicated)
 - **Responsive Design**: Fully responsive UI
 - **Form Handling**: Form submissions with validation
-- **Animations**: Smooth transitions and animations using Framer Motion
+- **Animations**: Smooth transitions and animations using plain tailwind css
 
 ## Deployment
 
-The application is deployed at: [Live Preview URL]
+The application is deployed at: [https://atlys-shivansh.surge.sh](atlys-shivansh.surge.sh`)
 
 ## What was fun/challenging
 
