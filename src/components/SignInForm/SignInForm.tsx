@@ -1,3 +1,4 @@
+import { Button } from '../common/Button';
 import { TextField } from '../common/TextField';
 import { useSignInForm } from './useSignInForm';
 
@@ -51,12 +52,7 @@ export const SignInForm = ({ isModal = false, onSuccess }: SignInFormProps) => {
         </div>
       </div>
 
-      <button
-        type="submit"
-        className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors"
-      >
-        Sign In
-      </button>
+      <Button type="submit">Sign In</Button>
     </form>
   );
 };
