@@ -36,7 +36,7 @@ export const Navbar = () => {
             ) : isLoginPage ? (
               <div className="flex items-center space-x-4">
                 <Link
-                  to="/signup"
+                  to="/"
                   className="flex flex-row items-center gap-1 text-sm font-semibold transition-colors"
                 >
                   Back to Home

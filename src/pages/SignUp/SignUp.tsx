@@ -9,7 +9,7 @@ export const SignUp = () => {
       <Navbar />
       <div className="animate-fadeIn flex min-h-screen items-center justify-center bg-white p-4">
         <div className="animate-scaleIn rounded-[30px] bg-gray-100 p-3 opacity-0">
-          <div className="flex w-full max-w-md min-w-sm flex-col gap-8 rounded-[21px] bg-white p-8 pb-12">
+          <div className="flex w-full max-w-xs flex-col gap-8 rounded-[21px] bg-white p-8 pb-12 sm:max-w-md">
             <div className="flex flex-col gap-2 text-center">
               <div className="mx-auto flex aspect-square size-13 flex-row items-center justify-center rounded-full bg-gray-100">
                 <TbLogout size={30} />
